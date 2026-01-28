@@ -4,6 +4,13 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 
 function TodoList() {
+  const [todo, setTodo] = React.useState("");
+
+  const isChecked = React.useRef(false);
+
+  const handleCheck = () => {
+    !isChecked;
+  };
   return (
     <>
       <div>
