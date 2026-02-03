@@ -14,6 +14,11 @@ function TodoList() {
     reset();
   };
 
+  const handleDelete = (index) => {
+    const newTodo = todo.filter((_, i) => i !== index);
+    setTodo(newTodo);
+  };
+
   const isChecked = React.useRef(false);
 
   const handleCheck = () => {
@@ -59,7 +64,10 @@ function TodoList() {
                     </div>
                     <div className='flex gap-2'>
                       <FaPencilAlt className='cursor-pointer' />
-                      <FaRegTrashAlt className='cursor-pointer' />
+                      <FaRegTrashAlt
+                        className='cursor-pointer'
+                        onClick={() => handleDelete(index)}
+                      />
                     </div>
                   </div>
                 ))}
