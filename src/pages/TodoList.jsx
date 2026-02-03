@@ -31,10 +31,18 @@ function TodoList() {
     setTodo(newTodo);
   };
 
-  const isChecked = React.useRef(false);
+  const isChecked = React.useRef([]);
 
-  const handleCheck = () => {
-    isChecked;
+  const textRef = React.useRef([]);
+
+  const handleCheck = (index) => {
+    isChecked.current[index] = !isChecked.current[index];
+
+    if (isChecked.current[index]) {
+      textRef.current[index].style.textDecoration = "line-through";
+    } else {
+      textRef.current[index].style.textDecoration = "none";
+    }
   };
   return (
     <>
@@ -68,8 +76,13 @@ function TodoList() {
                   className='bg-gray-300 border rounded w-full flex justify-between items-center px-5 py-2 text-base gap-4'
                 >
                   <div className='flex items-center gap-2'>
-                    <input className='outline-none' type='checkbox' />
                     <input
+                      onChange={() => handleCheck(index)}
+                      className='outline-none'
+                      type='checkbox'
+                    />
+                    <input
+                      ref={(i) => (textRef.current[index] = i)}
                       readOnly={edit !== index}
                       onChange={(e) => handleChangeTodo(e, index)}
                       onKeyDown={(e) => {
